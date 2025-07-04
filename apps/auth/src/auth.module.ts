@@ -4,6 +4,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -26,8 +27,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true, // Для разработки: автоматически создает/обновляет таблицы в БД.
                          // ВАЖНО: на продакшене это нужно выключить и использовать миграции.
     }),
+    UserModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],
 })
-export class AppModule {}
+export class AuthModule {}
