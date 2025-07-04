@@ -1,11 +1,11 @@
 // Путь: apps/auth/src/app.module.ts
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     // 1. Модуль для работы с переменными окружения.
@@ -25,11 +25,12 @@ import { UserModule } from './user/user.module';
       database: process.env.POSTGRES_DB,
       autoLoadEntities: true, // Автоматически находить и загружать все наши Entity.
       synchronize: true, // Для разработки: автоматически создает/обновляет таблицы в БД.
-                         // ВАЖНО: на продакшене это нужно выключить и использовать миграции.
+      // ВАЖНО: на продакшене это нужно выключить и использовать миграции.
     }),
     UserModule,
+    AuthModule
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AuthModule {}
+export class AppModule {}
