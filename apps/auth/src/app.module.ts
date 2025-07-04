@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { SeedingService } from './seeding.service';
 @Module({
   imports: [
     // 1. Модуль для работы с переменными окружения.
@@ -31,6 +32,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeedingService],
 })
 export class AppModule {}
